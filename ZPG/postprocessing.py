@@ -73,3 +73,14 @@ print(  f"Error U = {np.round(err[0],3)}%"+
         f"\nError V = {np.round(err[1],3)}%"+
         f"\nError uv = {np.round(err[2],3)}%"
         )
+
+from scipy.io import savemat
+savemat('pred/res_{data_name}.mat', {
+        'pred': data['pred'],
+            'ref':  data['ref'],
+                'x':    data['x'],
+                    'y':    data['y'],
+                        'hist': data['hist'],
+                            'err':  data['err'],
+                                'ct':   data['ct']
+                                })
