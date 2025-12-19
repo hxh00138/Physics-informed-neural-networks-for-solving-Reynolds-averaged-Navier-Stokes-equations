@@ -75,7 +75,7 @@ print(  f"Error U = {np.round(err[0],3)}%"+
         )
 
 from scipy.io import savemat
-savemat('pred/res_{data_name}.mat', {
+savemat(f"pred/res_{data_name}.mat", {
         'pred': data['pred'],
             'ref':  data['ref'],
                 'x':    data['x'],
