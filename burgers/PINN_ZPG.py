@@ -46,11 +46,9 @@ class PINNs(models.Model):
         
       
               
-        f1 = U * U_x + V * U_y -  self.nu * (U_xx + U_yy) + uv_y
-        f2 = U * V_x + V * V_y -  self.nu * (V_xx + V_yy) + uv_x 
-        f3 = U_x + V_y
+        f1 = U_t + U * U_x  -  self.nu * U_xx
         
-        f = tf.stack([f1, f2, f3], axis = -1)
+        f = tf.stack([f1], axis = -1)
         return f
     
     
