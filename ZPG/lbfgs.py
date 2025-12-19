@@ -18,7 +18,7 @@ class optimizer():
         part = [] # partition indices
     
         for i, shape in enumerate(self.shapes):
-            n = np.product(shape)
+            n = np.prod(shape)
             idx.append(tf.reshape(tf.range(count, count+n, dtype=tf.int32), shape))
             part.extend([i]*n)
             count += n
