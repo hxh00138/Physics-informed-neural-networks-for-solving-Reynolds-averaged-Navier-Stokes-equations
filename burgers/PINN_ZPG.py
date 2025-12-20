@@ -19,32 +19,21 @@ class PINNs(models.Model):
     def net_f(self, cp):
         cp = self.scalex_r(cp)
         x = cp[:, 0]
-        y = cp[:, 1]
+        t = cp[:, 1]
         with tf.GradientTape(persistent=True) as tape:
             tape.watch(x)
-            tape.watch(y)
-            X = tf.stack([x, y], axis = -1)
+            tape.watch(t)
+            X = tf.stack([x, t], axis = -1)
             X = self.scalex(X)
             pred = self.model(X)
             pred = self.scale_r(pred)
             U = pred[:, 0]
-            V = pred[:, 1]
-            uv = pred[:, 2]
 
 
             U_x = tape.gradient(U, x)
-            U_y = tape.gradient(U, y)
-            V_x = tape.gradient(V, x)
-            V_y = tape.gradient(V, y)
+            U_t = tape.gradient(U, t)
+    
         U_xx = tape.gradient(U_x, x)
-        U_yy = tape.gradient(U_y, y)
-        V_xx = tape.gradient(V_x, x)
-        V_yy = tape.gradient(V_y, y)
-
-        uv_y = tape.gradient(uv, y)
-        uv_x = tape.gradient(uv, x)
-        
-      
               
         f1 = U_t + U * U_x  -  self.nu * U_xx
         
